@@ -15,15 +15,13 @@ VERSION=2.1.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 INCLUDEPATH += ../SimCenterCommon/RandomVariables
-# INCLUDEPATH += ../simcenterAgave/interface
+INCLUDEPATH += ../SimCenterCommon/Workflow/WORKFLOW
 
-macos:LIBS += /usr/lib/libcurl.dylib
-win32:INCLUDEPATH += "../curl-7.59/include"
-win32:LIBS += "../curl-7.59/lib/libcurl_a.lib"
-win32:DEFINES +=  CURL_STATICLIB
-#win32:INCLUDEPATH+=../libCurl-7.59.0/include
-#win32:LIBS += ../libCurl-7.59.0/lib/libcurl.lib
-linux:LIBS += /usr/lib/x86_64-linux-gnu/libcurl.so
+include($$PWD/ConanHelper.pri)
+
+win32::LIBS+=Advapi32.lib
+
+# linux:LIBS += /usr/lib/x86_64-linux-gnu/libcurl.so
 
 win32 {
     RC_ICONS = icons/NHERI-quoFEM-Icon.ico
@@ -35,7 +33,7 @@ win32 {
 
 include(../SimCenterCommon/RandomVariables/RandomVariables.pri)
 include(../SimCenterCommon/Common/Common.pri)
-
+include(../SimCenterCommon/Workflow/JsonConfiguredWidgets.pri)
 
 SOURCES += main.cpp\
         MainWindow.cpp \
@@ -45,14 +43,19 @@ SOURCES += main.cpp\
         InputWidgetFEM.cpp \
         UQ_EngineSelection.cpp \
         DakotaInputSampling.cpp \
+        SimCenterUQInputSampling.cpp \
         DakotaInputSensitivity.cpp \
+        SimCenterUQInputSensitivity.cpp \
         UQ_Results.cpp \
         DakotaResultsSampling.cpp \
+        SimCenterUQResultsSampling.cpp \
         DakotaResultsSensitivity.cpp \
+        SimCenterUQResultsSensitivity.cpp \
         DakotaResultsCalibration.cpp \
         DakotaInputCalibration.cpp \
         UQ_Engine.cpp \
         DakotaEngine.cpp \
+        SimCenterUQEngine.cpp \
         UQpyEngine.cpp \
 	filterEngine.cpp \
         InputWidgetParameters.cpp \
@@ -79,23 +82,33 @@ SOURCES += main.cpp\
     GlobalReliabilityWidget.cpp \
     SimCenterGraphPlot.cpp \
     qcustomplot.cpp \
-    DakotaResultsReliability.cpp
+    DakotaResultsReliability.cpp \
+    UQ_JsonEngine.cpp \
+    UCSD_Engine.cpp \
+    UCSD_TMMC.cpp \
+    UCSD_Results.cpp \
+    CustomUQ_Results.cpp
 
 HEADERS  += MainWindow.h \
     InputWidgetEDP.h \
-EDP.h \
+    EDP.h \
     InputWidgetFEM.h \
     SidebarWidgetSelection.h \
     UQ_EngineSelection.h \
     DakotaInputSampling.h \
+    SimCenterUQInputSampling.h \
     DakotaInputSensitivity.h \
+    SimCenterUQInputSensitivity.h \
     UQ_Results.h \
     DakotaResultsSampling.h \
+    SimCenterUQResultsSampling.h \
     DakotaInputCalibration.h \
     DakotaResultsCalibration.h \
     DakotaResultsSensitivity.h \
+    SimCenterUQResultsSensitivity.h \
     UQ_Engine.h \
     DakotaEngine.h \
+    SimCenterUQEngine.h \
     UQpyEngine.h \
     filterEngine.h \
     InputWidgetParameters.h \
@@ -122,7 +135,12 @@ EDP.h \
     LocalReliabilityWidget.h \
     GlobalReliabilityWidget.h \
     qcustomplot.h \
-    DakotaResultsReliability.h
+    DakotaResultsReliability.h \
+    UQ_JsonEngine.h \
+    UCSD_Engine.h \
+    UCSD_TMMC.h \
+    UCSD_Results.h \
+    CustomUQ_Results.h
 
 FORMS    += mainwindow.ui
 

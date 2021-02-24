@@ -50,6 +50,7 @@ InputWidgetParameters::InputWidgetParameters(QWidget *parent)
     : SimCenterWidget(parent), theParameters(0)
 {
     layout = new QVBoxLayout();
+    layout->setMargin(0);
     this->setLayout(layout);
 }
 
@@ -82,7 +83,7 @@ InputWidgetParameters::setParametersWidget(RandomVariablesContainer *param) {
     if (theParameters != 0) {
         layout->removeWidget(theParameters);
         delete theParameters;
-        theParameters = 0;
+        theParameters = nullptr;
     }
 
     if (param != 0) {

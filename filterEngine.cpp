@@ -84,7 +84,7 @@ filterEngine::processResults(QString &filenameResults, QString &filenameTab) {
 RandomVariablesContainer *
 filterEngine::getParameters() {
   QString classType("Uncertain");
-  RandomVariablesContainer *theRV =  new RandomVariablesContainer(classType);
+  RandomVariablesContainer *theRV =  new RandomVariablesContainer(classType,QString("filterEngin"));
   return theRV;
 }
 

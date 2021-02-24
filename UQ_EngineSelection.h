@@ -46,6 +46,7 @@ class QStackedWidget;
 class RandomVariablesContainer;
 class UQ_Results;
 class UQ_Engine;
+class InputWidgetEDP;
 
 class UQ_EngineSelection : public  SimCenterAppWidget
 {
@@ -53,7 +54,7 @@ class UQ_EngineSelection : public  SimCenterAppWidget
 
     public:
 
-  explicit UQ_EngineSelection(QWidget *parent = 0);
+  explicit UQ_EngineSelection(InputWidgetEDP *edpwidget, QWidget *parent = 0);
   ~UQ_EngineSelection();
 
   RandomVariablesContainer  *getParameters();
@@ -66,12 +67,14 @@ class UQ_EngineSelection : public  SimCenterAppWidget
   bool outputToJSON(QJsonObject &rvObject);
   bool inputFromJSON(QJsonObject &rvObject);
   bool copyFiles(QString &destName);
-  
+
   void clear(void);
   
  signals:
-  void onUQ_EngineChanged(void);
+  void onUQ_EngineChanged(bool);
   void onNumModelsChanged(int);
+
+  // void remoteRunningCapability(bool);
 
  public slots:
   void engineSelectionChanged(const QString &arg1);
@@ -79,13 +82,19 @@ class UQ_EngineSelection : public  SimCenterAppWidget
   void numModelsChanged(int newNum);
   
 private:
+
    QComboBox   *theEngineSelectionBox;
    QStackedWidget *theStackedWidget;
 
    UQ_Engine *theCurrentEngine;
    UQ_Engine *theDakotaEngine;
+   UQ_Engine *theSimCenterUQEngine;
    UQ_Engine *theUQpyEngine;
+   UQ_Engine *theUCSD_Engine;
    UQ_Engine *thefilterEngine;
+   UQ_Engine *theCustomEngine;
+
+  InputWidgetEDP *theEdpWidget;
 };
 
 #endif // WIND_SELECTION_H
