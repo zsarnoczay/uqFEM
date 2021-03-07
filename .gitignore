@@ -48,6 +48,10 @@ uqFEM.pro.user
 
 # build folder
 applications/out/build/*
+applications/build/*
+
+# compiled applications
+applications/applications/*
 
 Makefile
 *.pro.user
